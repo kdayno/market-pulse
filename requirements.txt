@@ -1,0 +1,12 @@
+pyiceberg
+pyiceberg[s3fs,pyarrow]
+boto3
+python-dotenv
+requests
+polygon-api-client
+
+praw
+
+#transformers
+#torch 
+#torchvision
