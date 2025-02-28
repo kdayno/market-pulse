@@ -5,7 +5,7 @@ python-dotenv
 requests
 polygon-api-client
 
-praw
+asyncpraw
 
 #transformers
 #torch 
