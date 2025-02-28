@@ -44,6 +44,7 @@ CREATE TABLE tabular.dataexpert.kdayno_bronze_reddit_top_posts (
   load_date_ts TIMESTAMP
   )
 USING delta
+PARTITIONED BY (subreddit)
 TBLPROPERTIES (
   'delta.autoOptimize.optimizeWrite' = 'true',
   'delta.autoOptimize.autoCompact' = 'true'
@@ -67,6 +68,7 @@ CREATE TABLE tabular.dataexpert.kdayno_bronze_reddit_hot_posts (
   load_date_ts TIMESTAMP
   )
 USING delta
+PARTITIONED BY (subreddit)
 TBLPROPERTIES (
   'delta.autoOptimize.optimizeWrite' = 'true',
   'delta.autoOptimize.autoCompact' = 'true'
