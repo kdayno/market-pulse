@@ -27,7 +27,7 @@ TBLPROPERTIES (
 
 
 CREATE TABLE tabular.dataexpert.kdayno_bronze_reddit_top_posts (
-  ticker_symbol STRING,
+  company_name STRING,
   post_id STRING,
   post_title STRING,
   subreddit_id STRING,
@@ -51,7 +51,7 @@ TBLPROPERTIES (
 );
 
 CREATE TABLE tabular.dataexpert.kdayno_bronze_reddit_hot_posts (
-  ticker_symbol STRING,
+  company_name STRING,
   post_id STRING,
   post_title STRING,
   subreddit_id STRING,
