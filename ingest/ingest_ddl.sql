@@ -1,12 +1,12 @@
 CREATE TABLE tabular.dataexpert.kdayno_bronze_SP500_companies (
-  Symbol STRING,
-  Security STRING,
-  GICS_Sector STRING,
-  GICS_Sub_Industry STRING,
-  Headquarters_Location STRING,
-  Date_added DATE,
-  CIK INT,
-  Founded INT,
+  ticker_symbol STRING,
+  company_name STRING,
+  gics_sector STRING,
+  gics_sub_industry STRING,
+  headquarters_location STRING,
+  date_added DATE,
+  cik INT,
+  founded INT,
   load_date_ts TIMESTAMP)
 USING delta;
 
