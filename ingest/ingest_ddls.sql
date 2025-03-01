@@ -1,4 +1,4 @@
-CREATE TABLE tabular.dataexpert.kdayno_bronze_SP500_companies (
+CREATE OR REPLACE TABLE tabular.dataexpert.kdayno_bronze_SP500_companies (
   ticker_symbol STRING,
   company_name STRING,
   gics_sector STRING,
@@ -10,7 +10,7 @@ CREATE TABLE tabular.dataexpert.kdayno_bronze_SP500_companies (
   load_date_ts TIMESTAMP)
 USING delta;
 
-CREATE TABLE tabular.dataexpert.kdayno_bronze_SP500_stock_prices (
+CREATE OR REPLACE TABLE tabular.dataexpert.kdayno_bronze_SP500_stock_prices (
   ticker_symbol STRING,
   open_price DECIMAL(10,2),
   close_price DECIMAL(10,2),
@@ -26,7 +26,7 @@ TBLPROPERTIES (
 );
 
 
-CREATE TABLE tabular.dataexpert.kdayno_bronze_reddit_top_posts (
+CREATE OR REPLACE TABLE tabular.dataexpert.kdayno_bronze_reddit_top_posts (
   company_name STRING,
   post_id STRING,
   post_title STRING,
@@ -50,7 +50,7 @@ TBLPROPERTIES (
   'delta.autoOptimize.autoCompact' = 'true'
 );
 
-CREATE TABLE tabular.dataexpert.kdayno_bronze_reddit_hot_posts (
+CREATE OR REPLACE TABLE tabular.dataexpert.kdayno_bronze_reddit_hot_posts (
   company_name STRING,
   post_id STRING,
   post_title STRING,

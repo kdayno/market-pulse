@@ -1,5 +1,5 @@
 
-CREATE TABLE tabular.dataexpert.kdayno_silver_reddit_top_posts_sentiment (
+CREATE OR REPLACE TABLE tabular.dataexpert.kdayno_silver_reddit_top_posts_sentiment (
   company_name STRING,
   post_id STRING,
   post_title STRING,
@@ -26,7 +26,7 @@ TBLPROPERTIES (
 );
 
 
-CREATE TABLE tabular.dataexpert.kdayno_silver_reddit_hot_posts_sentiment (
+CREATE OR REPLACE TABLE tabular.dataexpert.kdayno_silver_reddit_hot_posts_sentiment (
   company_name STRING,
   post_id STRING,
   post_title STRING,
