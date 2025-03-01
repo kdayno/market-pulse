@@ -1,12 +1,8 @@
-pyiceberg
-pyiceberg[s3fs,pyarrow]
 boto3
 python-dotenv
 requests
 polygon-api-client
-
 asyncpraw
-
-#transformers
-#torch 
-#torchvision
+dbt-core
+dbt-databricks
+sqlfluff
