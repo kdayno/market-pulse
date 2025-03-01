@@ -1,6 +1,6 @@
 
 CREATE TABLE tabular.dataexpert.kdayno_silver_reddit_top_posts_sentiment (
-  ticker_symbol STRING,
+  company_name STRING,
   post_id STRING,
   post_title STRING,
   subreddit_id STRING,
@@ -27,7 +27,7 @@ TBLPROPERTIES (
 
 
 CREATE TABLE tabular.dataexpert.kdayno_silver_reddit_hot_posts_sentiment (
-  ticker_symbol STRING,
+  company_name STRING,
   post_id STRING,
   post_title STRING,
   subreddit_id STRING,
