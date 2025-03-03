@@ -52,3 +52,44 @@ TBLPROPERTIES (
   'delta.autoOptimize.autoCompact' = 'true'
 );
 
+
+CREATE OR REPLACE TABLE tabular.dataexpert.kdayno_silver_SP500_stock_prices (
+  ticker_symbol STRING,
+  company_name STRING,
+  gics_sector STRING,
+  gics_sub_industry STRING,
+  open_price DECIMAL(10,2),
+  close_price DECIMAL(10,2),
+  highest_price DECIMAL(10,2),
+  lowest_price DECIMAL(10,2),
+  trading_date DATE)
+USING delta
+PARTITIONED BY (trading_date)
+TBLPROPERTIES (
+  'delta.autoOptimize.optimizeWrite' = 'true',
+  'delta.autoOptimize.autoCompact' = 'true'
+);
+
+
+CREATE OR REPLACE TABLE tabular.dataexpert.kdayno_silver_reddit_all_posts (
+  ticker_symbol STRING,
+  post_id STRING,
+  created_date_utc DATE,
+  number_of_upvotes INT,
+  number_of_downvotes DOUBLE,
+  upvote_ratio FLOAT,
+  downvote_ratio FLOAT,
+  number_of_comments INT,
+  sentiment_category STRING,
+  sentiment_score FLOAT,
+  total_number_of_votes DOUBLE,
+  company_name STRING,
+  gics_sector STRING,
+  gics_sub_industry STRING)
+USING delta
+PARTITIONED BY (created_date_utc)
+TBLPROPERTIES (
+  'delta.autoOptimize.optimizeWrite' = 'true',
+  'delta.autoOptimize.autoCompact' = 'true'
+);
+
