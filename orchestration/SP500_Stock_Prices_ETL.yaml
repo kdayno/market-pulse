@@ -1,0 +1,29 @@
+resources:
+  jobs:
+    SP500_Stock_Prices_ETL:
+      name: SP500_Stock_Prices_ETL
+      tasks:
+        - task_key: ingest_polygon_stock_prices
+          notebook_task:
+            notebook_path: /Workspace/Users/kdayno@gmail.com/market-pulse/ingest/ingest_polygon_stock_prices
+            source: WORKSPACE
+          existing_cluster_id: 0128-183328-vd953k7a
+        - task_key: bronze_SP500_stock_prices_dq_tests
+          depends_on:
+            - task_key: ingest_polygon_stock_prices
+          notebook_task:
+            notebook_path: /Workspace/Users/kdayno@gmail.com/market-pulse/tests/data-quality-tests/bronze_SP500_stock_prices_dq_tests
+            source: WORKSPACE
+          existing_cluster_id: 0128-183328-vd953k7a
+        - task_key: transform_SP500_stock_prices
+          depends_on:
+            - task_key: bronze_SP500_stock_prices_dq_tests
+          notebook_task:
+            notebook_path: /Workspace/Users/kdayno@gmail.com/market-pulse/transform/transform_SP500_stock_prices
+            source: WORKSPACE
+          existing_cluster_id: 0128-183328-vd953k7a
+      queue:
+        enabled: true
+      parameters:
+        - name: input_load_date
+          default: ""
