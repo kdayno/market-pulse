@@ -1,0 +1,47 @@
+resources:
+  jobs:
+    SP500_Stock_Prices_ETL_Backfill:
+      name: SP500_Stock_Prices_ETL_Backfill
+      tasks:
+        - task_key: ingest_polygon_stock_prices
+          for_each_task:
+            inputs: "{{job.parameters.input_load_date_range}}"
+            task:
+              task_key: ingest_polygon_stock_prices_iteration
+              notebook_task:
+                notebook_path: /Workspace/Users/kdayno@gmail.com/market-pulse/ingest/ingest_polygon_stock_prices
+                base_parameters:
+                  input_load_date: "{{input}}"
+                source: WORKSPACE
+              existing_cluster_id: 0128-183328-vd953k7a
+        - task_key: bronze_SP500_stock_prices_dq_tests
+          depends_on:
+            - task_key: ingest_polygon_stock_prices
+          for_each_task:
+            inputs: "{{job.parameters.input_load_date_range}}"
+            task:
+              task_key: dq_tests_bronze_SP500_stock_prices
+              notebook_task:
+                notebook_path: /Workspace/Users/kdayno@gmail.com/market-pulse/tests/data-quality-tests/dq_tests_silver_reddit_hot_posts_sentiment
+                base_parameters:
+                  input_load_date: "{{input}}"
+                source: WORKSPACE
+              existing_cluster_id: 0128-183328-vd953k7a
+        - task_key: transform_SP500_stock_prices
+          depends_on:
+            - task_key: bronze_SP500_stock_prices_dq_tests
+          for_each_task:
+            inputs: "{{job.parameters.input_load_date_range}}"
+            task:
+              task_key: transform_SP500_stock_prices_iteration
+              notebook_task:
+                notebook_path: /Workspace/Users/kdayno@gmail.com/market-pulse/transform/transform_SP500_stock_prices
+                base_parameters:
+                  input_load_date: "{{input}}"
+                source: WORKSPACE
+              existing_cluster_id: 0128-183328-vd953k7a
+      queue:
+        enabled: true
+      parameters:
+        - name: input_load_date_range
+          default: '["YYYY-MM-DD", "YYYY-MM-DD"]'
