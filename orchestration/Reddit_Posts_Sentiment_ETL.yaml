@@ -1,0 +1,137 @@
+resources:
+  jobs:
+    Reddit_Posts_Sentiment_ETL:
+      name: Reddit_Posts_Sentiment_ETL
+      tasks:
+        - task_key: extract_reddit_top_posts
+          notebook_task:
+            notebook_path: /Workspace/Users/kdayno@gmail.com/market-pulse/etl/extract/extract_reddit_posts
+            base_parameters:
+              bronze_table_name: kdayno_bronze_reddit_top_posts
+              input_subreddit_list: "['stocks', 'investing', 'trading', 'wallstreetbets']"
+              input_sort_type: top
+              input_time_filter: year
+              input_number_of_posts_limit: "500"
+            source: WORKSPACE
+          existing_cluster_id: 0128-183328-vd953k7a
+        - task_key: extract_reddit_hot_posts
+          depends_on:
+            - task_key: extract_reddit_top_posts
+          notebook_task:
+            notebook_path: /Workspace/Users/kdayno@gmail.com/market-pulse/etl/extract/extract_reddit_posts
+            base_parameters:
+              bronze_table_name: kdayno_bronze_reddit_hot_posts
+              input_subreddit_list: "['stocks', 'investing', 'trading', 'wallstreetbets']"
+              input_sort_type: hot
+              input_time_filter: month
+              input_number_of_posts_limit: "500"
+            source: WORKSPACE
+          existing_cluster_id: 0128-183328-vd953k7a
+        - task_key: transform_reddit_hot_posts_sentiment_analysis
+          depends_on:
+            - task_key: extract_reddit_hot_posts
+          notebook_task:
+            notebook_path: /Workspace/Users/kdayno@gmail.com/market-pulse/etl/transform/transform_reddit_posts_sentiment_analysis
+            base_parameters:
+              bronze_table_name: kdayno_bronze_reddit_hot_posts
+              silver_table_name: kdayno_silver_reddit_hot_posts_sentiment
+            source: WORKSPACE
+          existing_cluster_id: 0128-183328-vd953k7a
+        - task_key: dq_tests_silver_reddit_hot_posts_sentiment
+          depends_on:
+            - task_key: transform_reddit_hot_posts_sentiment_analysis
+          notebook_task:
+            notebook_path: /Workspace/Users/kdayno@gmail.com/market-pulse/tests/data-quality-tests/dq_tests_silver_reddit_posts_sentiment
+            base_parameters:
+              silver_table_name: kdayno_silver_reddit_hot_posts_sentiment
+            source: WORKSPACE
+          existing_cluster_id: 0128-183328-vd953k7a
+        - task_key: transform_reddit_top_posts_sentiment_analysis
+          depends_on:
+            - task_key: extract_reddit_top_posts
+          notebook_task:
+            notebook_path: /Workspace/Users/kdayno@gmail.com/market-pulse/etl/transform/transform_reddit_posts_sentiment_analysis
+            base_parameters:
+              bronze_table_name: kdayno_bronze_reddit_top_posts
+              silver_table_name: kdayno_silver_reddit_top_posts_sentiment
+            source: WORKSPACE
+          existing_cluster_id: 0128-183328-vd953k7a
+        - task_key: dq_tests_silver_reddit_top_posts_sentiment
+          depends_on:
+            - task_key: transform_reddit_top_posts_sentiment_analysis
+          notebook_task:
+            notebook_path: /Workspace/Users/kdayno@gmail.com/market-pulse/tests/data-quality-tests/dq_tests_silver_reddit_posts_sentiment
+            base_parameters:
+              silver_table_name: kdayno_silver_reddit_top_posts_sentiment
+            source: WORKSPACE
+          existing_cluster_id: 0128-183328-vd953k7a
+        - task_key: transform_reddit_all_posts
+          depends_on:
+            - task_key: dq_tests_silver_reddit_top_posts_sentiment
+            - task_key: dq_tests_silver_reddit_hot_posts_sentiment
+          notebook_task:
+            notebook_path: /Workspace/Users/kdayno@gmail.com/market-pulse/etl/transform/transform_reddit_all_posts
+            source: WORKSPACE
+          existing_cluster_id: 0128-183328-vd953k7a
+        - task_key: reddit_posts_overall_sentiment_last_30_days_agg
+          depends_on:
+            - task_key: transform_reddit_all_posts
+          notebook_task:
+            notebook_path: /Workspace/Users/kdayno@gmail.com/market-pulse/etl/load/reddit_posts_overall_sentiment_agg
+            base_parameters:
+              input_number_of_days: "30"
+              target_table_name: kdayno_gold_posts_last_30_days_overall_sentiment_agg
+            source: WORKSPACE
+          existing_cluster_id: 0128-183328-vd953k7a
+        - task_key: reddit_posts_overall_sentiment_last_365_days_agg
+          depends_on:
+            - task_key: transform_reddit_all_posts
+          notebook_task:
+            notebook_path: /Workspace/Users/kdayno@gmail.com/market-pulse/etl/load/reddit_posts_overall_sentiment_agg
+            base_parameters:
+              input_number_of_days: "365"
+              target_table_name: kdayno_gold_posts_last_365_days_overall_sentiment_agg
+            source: WORKSPACE
+          existing_cluster_id: 0128-183328-vd953k7a
+        - task_key: reddit_posts_overall_sentiment_last_90_days_agg
+          depends_on:
+            - task_key: transform_reddit_all_posts
+          notebook_task:
+            notebook_path: /Workspace/Users/kdayno@gmail.com/market-pulse/etl/load/reddit_posts_overall_sentiment_agg
+            base_parameters:
+              input_number_of_days: "90"
+              target_table_name: kdayno_gold_posts_last_90_days_overall_sentiment_agg
+            source: WORKSPACE
+          existing_cluster_id: 0128-183328-vd953k7a
+        - task_key: reddit_posts_subreddit_sentiment_last_30_days_agg
+          depends_on:
+            - task_key: transform_reddit_all_posts
+          notebook_task:
+            notebook_path: /Workspace/Users/kdayno@gmail.com/market-pulse/etl/load/reddit_posts_subreddit_sentiment_agg
+            base_parameters:
+              input_number_of_days: "30"
+              target_table_name: kdayno_gold_posts_last_30_days_subreddit_sentiment_agg
+            source: WORKSPACE
+          existing_cluster_id: 0128-183328-vd953k7a
+        - task_key: reddit_posts_subreddit_sentiment_last_365_days_agg
+          depends_on:
+            - task_key: transform_reddit_all_posts
+          notebook_task:
+            notebook_path: /Workspace/Users/kdayno@gmail.com/market-pulse/etl/load/reddit_posts_subreddit_sentiment_agg
+            base_parameters:
+              input_number_of_days: "365"
+              target_table_name: kdayno_gold_posts_last_365_days_subreddit_sentiment_agg
+            source: WORKSPACE
+          existing_cluster_id: 0128-183328-vd953k7a
+        - task_key: reddit_posts_subreddit_sentiment_last_90_days_agg
+          depends_on:
+            - task_key: transform_reddit_all_posts
+          notebook_task:
+            notebook_path: /Workspace/Users/kdayno@gmail.com/market-pulse/etl/load/reddit_posts_subreddit_sentiment_agg
+            base_parameters:
+              input_number_of_days: "90"
+              target_table_name: kdayno_gold_posts_last_90_days_subreddit_sentiment_agg
+            source: WORKSPACE
+          existing_cluster_id: 0128-183328-vd953k7a
+      queue:
+        enabled: true

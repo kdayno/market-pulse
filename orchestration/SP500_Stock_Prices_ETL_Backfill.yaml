@@ -9,7 +9,7 @@ resources:
             task:
               task_key: ingest_polygon_stock_prices_iteration
               notebook_task:
-                notebook_path: /Workspace/Users/kdayno@gmail.com/market-pulse/ingest/ingest_polygon_stock_prices
+                notebook_path: /Workspace/Users/kdayno@gmail.com/market-pulse/etl/extract/extract_polygon_stock_prices
                 base_parameters:
                   input_load_date: "{{input}}"
                 source: WORKSPACE
@@ -22,7 +22,7 @@ resources:
             task:
               task_key: dq_tests_bronze_SP500_stock_prices
               notebook_task:
-                notebook_path: /Workspace/Users/kdayno@gmail.com/market-pulse/tests/data-quality-tests/dq_tests_silver_reddit_hot_posts_sentiment
+                notebook_path: /Workspace/Users/kdayno@gmail.com/market-pulse/tests/data-quality-tests/dq_tests_bronze_SP500_stock_prices
                 base_parameters:
                   input_load_date: "{{input}}"
                 source: WORKSPACE
@@ -35,11 +35,20 @@ resources:
             task:
               task_key: transform_SP500_stock_prices_iteration
               notebook_task:
-                notebook_path: /Workspace/Users/kdayno@gmail.com/market-pulse/transform/transform_SP500_stock_prices
+                notebook_path: /Workspace/Users/kdayno@gmail.com/market-pulse/etl/transform/transform_SP500_stock_prices
                 base_parameters:
                   input_load_date: "{{input}}"
                 source: WORKSPACE
               existing_cluster_id: 0128-183328-vd953k7a
+        - task_key: SP500_stock_prices_avg_agg
+          depends_on:
+            - task_key: transform_SP500_stock_prices
+          notebook_task:
+            notebook_path: /Workspace/Users/kdayno@gmail.com/market-pulse/etl/load/SP500_stock_prices_avg_agg
+            base_parameters:
+              target_table_name: SP500_stock_prices_avg_agg
+            source: WORKSPACE
+          existing_cluster_id: 0128-183328-vd953k7a
       queue:
         enabled: true
       parameters:

@@ -71,9 +71,11 @@ TBLPROPERTIES (
 );
 
 
-CREATE OR REPLACE TABLE tabular.dataexpert.kdayno_silver_reddit_all_posts (
+CREATE TABLE tabular.dataexpert.kdayno_silver_reddit_all_posts (
   ticker_symbol STRING,
   post_id STRING,
+  post_category STRING,
+  subreddit STRING,
   created_date_utc DATE,
   number_of_upvotes INT,
   number_of_downvotes DOUBLE,
