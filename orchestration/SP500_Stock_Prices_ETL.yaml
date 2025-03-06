@@ -5,25 +5,34 @@ resources:
       tasks:
         - task_key: ingest_polygon_stock_prices
           notebook_task:
-            notebook_path: /Workspace/Users/kdayno@gmail.com/market-pulse/ingest/ingest_polygon_stock_prices
+            notebook_path: /Workspace/Users/kdayno@gmail.com/market-pulse/etl/extract/extract_polygon_stock_prices
             source: WORKSPACE
           existing_cluster_id: 0128-183328-vd953k7a
         - task_key: bronze_SP500_stock_prices_dq_tests
           depends_on:
             - task_key: ingest_polygon_stock_prices
           notebook_task:
-            notebook_path: /Workspace/Users/kdayno@gmail.com/market-pulse/tests/data-quality-tests/bronze_SP500_stock_prices_dq_tests
+            notebook_path: /Workspace/Users/kdayno@gmail.com/market-pulse/tests/data-quality-tests/dq_tests_bronze_SP500_stock_prices
             source: WORKSPACE
           existing_cluster_id: 0128-183328-vd953k7a
         - task_key: transform_SP500_stock_prices
           depends_on:
             - task_key: bronze_SP500_stock_prices_dq_tests
           notebook_task:
-            notebook_path: /Workspace/Users/kdayno@gmail.com/market-pulse/transform/transform_SP500_stock_prices
+            notebook_path: /Workspace/Users/kdayno@gmail.com/market-pulse/etl/transform/transform_SP500_stock_prices
+            source: WORKSPACE
+          existing_cluster_id: 0128-183328-vd953k7a
+        - task_key: SP500_stock_prices_avg_agg
+          depends_on:
+            - task_key: transform_SP500_stock_prices
+          notebook_task:
+            notebook_path: /Workspace/Users/kdayno@gmail.com/market-pulse/etl/load/SP500_stock_prices_avg_agg
+            base_parameters:
+              target_table_name: kdayno_gold_SP500_stock_prices_avg_agg
             source: WORKSPACE
           existing_cluster_id: 0128-183328-vd953k7a
       queue:
         enabled: true
       parameters:
         - name: input_load_date
-          default: ""
+          default: YYYY-MM-DD
