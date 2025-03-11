@@ -1,15 +1,11 @@
 resources:
   jobs:
-    SP500_Stock_Prices_ETL:
-      name: SP500_Stock_Prices_ETL
-      schedule:
-        quartz_cron_expression: 49 0 22 * * ?
-        timezone_id: UTC
-        pause_status: PAUSED
+    SP500_Financials_ETL:
+      name: SP500_Financials_ETL
       tasks:
-        - task_key: ingest_polygon_stock_prices
+        - task_key: extract_polygon_stock_financials
           notebook_task:
-            notebook_path: /Workspace/Users/kdayno@gmail.com/market-pulse/etl/extract/extract_polygon_stock_prices
+            notebook_path: /Workspace/Users/kdayno@gmail.com/market-pulse/etl/extract/extract_polygon_stock_financials
             base_parameters:
               job_start_datetime: "{{job.start_time.iso_datetime}}"
               task_name: "{{task.name}}"
@@ -21,11 +17,11 @@ resources:
           job_cluster_key: Job_Cluster_Large
           libraries:
             - requirements: /Workspace/Users/kdayno@gmail.com/market-pulse/requirements.txt
-        - task_key: bronze_SP500_stock_prices_dq_tests
+        - task_key: transform_SP500_stock_financials
           depends_on:
-            - task_key: ingest_polygon_stock_prices
+            - task_key: extract_polygon_stock_financials
           notebook_task:
-            notebook_path: /Workspace/Users/kdayno@gmail.com/market-pulse/tests/data-quality-tests/dq_tests_bronze_SP500_stock_prices
+            notebook_path: /Workspace/Users/kdayno@gmail.com/market-pulse/etl/transform/transform_SP500_stock_financials
             base_parameters:
               job_start_datetime: "{{job.start_time.iso_datetime}}"
               task_name: "{{task.name}}"
@@ -35,31 +31,17 @@ resources:
               task_run_id: "{{task.run_id}}"
             source: WORKSPACE
           job_cluster_key: Job_Cluster_Large
-        - task_key: transform_SP500_stock_prices
+        - task_key: SP500_stock_financial_ratios_agg
           depends_on:
-            - task_key: bronze_SP500_stock_prices_dq_tests
+            - task_key: transform_SP500_stock_financials
           notebook_task:
-            notebook_path: /Workspace/Users/kdayno@gmail.com/market-pulse/etl/transform/transform_SP500_stock_prices
+            notebook_path: /Workspace/Users/kdayno@gmail.com/market-pulse/etl/load/SP500_stock_financial_ratios_agg
             base_parameters:
               job_start_datetime: "{{job.start_time.iso_datetime}}"
               task_name: "{{task.name}}"
               job_name: "{{job.name}}"
               job_id: "{{job.id}}"
-              job_start_date: "{{job.start_time.iso_date}}"
-              task_run_id: "{{task.run_id}}"
-            source: WORKSPACE
-          job_cluster_key: Job_Cluster_Large
-        - task_key: SP500_stock_prices_avg_agg
-          depends_on:
-            - task_key: transform_SP500_stock_prices
-          notebook_task:
-            notebook_path: /Workspace/Users/kdayno@gmail.com/market-pulse/etl/load/SP500_stock_prices_avg_agg
-            base_parameters:
-              job_start_datetime: "{{job.start_time.iso_datetime}}"
-              task_name: "{{task.name}}"
-              job_name: "{{job.name}}"
-              job_id: "{{job.id}}"
-              target_table_name: kdayno_gold_SP500_stock_prices_avg_agg
+              target_table_name: kdayno_gold_SP500_stock_financial_ratios_agg
               job_start_date: "{{job.start_time.iso_date}}"
               task_run_id: "{{task.run_id}}"
             source: WORKSPACE
@@ -89,6 +71,3 @@ resources:
               max_workers: 4
       queue:
         enabled: true
-      parameters:
-        - name: input_load_date
-          default: "{{job.start_time.iso_date}}"
