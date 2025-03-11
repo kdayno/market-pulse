@@ -41,7 +41,8 @@ CREATE OR REPLACE TABLE tabular.dataexpert.kdayno_bronze_reddit_top_posts (
   is_original_content BOOLEAN,
   permalink STRING,
   post_url STRING,
-  load_date_ts TIMESTAMP
+  load_date_ts TIMESTAMP,
+  row_identifier STRING
   )
 USING delta
 PARTITIONED BY (subreddit)
@@ -65,7 +66,8 @@ CREATE OR REPLACE TABLE tabular.dataexpert.kdayno_bronze_reddit_hot_posts (
   is_original_content BOOLEAN,
   permalink STRING,
   post_url STRING,
-  load_date_ts TIMESTAMP
+  load_date_ts TIMESTAMP,
+  row_identifier STRING
   )
 USING delta
 PARTITIONED BY (subreddit)
