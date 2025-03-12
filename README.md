@@ -1,4 +1,5 @@
-# Market Pulse
+![Market Pulse Logo](./docs/market-pulse-logo.png)
+
 
 ## Problem Statement
 The average retail investor interested in stock market investing often faces an overwhelming amount of information, making it challenging to gain quick, actionable insights into a company's stock performance and public sentiment. This information overload can lead to decision paralysis or uninformed investment choices. 
