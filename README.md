@@ -42,4 +42,3 @@ their Free tier which caused issues with extracting Reddit posts data
 # Future Enhancements
 1. Source data from addtional social media networks (e.g. Twitter, Blue Sky, etc.) for more comprehensive sentiment analysis
 2. Add posts data from additional stock/investing related subreddits
-**
