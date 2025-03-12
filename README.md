@@ -25,9 +25,9 @@ to gather information about a prospective company they may want to invest in.
 ## Tech Stack
 - **Storage:** AWS S3, Delta Lake, Parquet
 - **Processing:** Databricks, Hugging Face, Apache Spark, dbt
+- **Data Visualization:** Databricks Dashboards
 - **Orchestration:** Astronomer/Airflow
 - **DevOps:** GitHub, GitHub Actions
-- **Data Visualization:** Databricks Dashboards
 
 ## Conceptual Data Model
 ![Conceptual Data Model Diagram](./docs/conceptual-data-model.png)
