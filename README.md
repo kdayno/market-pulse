@@ -1,5 +1,6 @@
 **![Market Pulse Logo](./docs/market-pulse-logo.png)
 
+# Overview
 
 ## Problem Statement
 The average retail investor interested in stock market investing often faces an overwhelming amount of information, making it challenging to gain quick, actionable insights into a company's stock performance and public sentiment. This information overload can lead to decision paralysis or uninformed investment choices. 
@@ -16,7 +17,7 @@ to gather information about a prospective company they may want to invest in.
 - Polygon.io API
 - Reddit API
 
-# Design
+# Design & Development
 
 ## Solution Architecture
 ![Solution Architecture Diagram](./docs/solution-architecture.png)
