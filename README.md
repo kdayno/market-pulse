@@ -1,4 +1,4 @@
-![Market Pulse Logo](./docs/market-pulse-logo.png)
+**![Market Pulse Logo](./docs/market-pulse-logo.png)
 
 
 ## Problem Statement
@@ -26,10 +26,13 @@ to gather information about a prospective company they may want to invest in.
 - **Processing:** Databricks, Hugging Face, Apache Spark, dbt
 - **Orchestration:** Astronomer/Airflow
 - **DevOps:** GitHub, GitHub Actions
-- **Data Visualization:** Apache Superset
+- **Data Visualization:** Databricks Dashboards
 
 ## Conceptual Data Model
-![Conceptual Data Model Diagra ](./docs/conceptual-data-model.png)
+![Conceptual Data Model Diagram](./docs/conceptual-data-model.png)
+
+## Dashboard
+![Market Pulse Dashboard](./docs/market_pulse_dashboard.jpeg)
 
 # Challenges
 - The Reddit API has a rate limit of 100 queries per minute (QPM) per OAuth client ID for
@@ -38,3 +41,4 @@ their Free tier which caused issues with extracting Reddit posts data
 # Future Enhancements
 1. Source data from addtional social media networks (e.g. Twitter, Blue Sky, etc.) for more comprehensive sentiment analysis
 2. Add posts data from additional stock/investing related subreddits
+**
