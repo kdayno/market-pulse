@@ -1,5 +1,6 @@
-**![Market Pulse Logo](./docs/market-pulse-logo.png)
+![Market Pulse Logo](./docs/market-pulse-logo.png)
 
+# Overview
 
 ## Problem Statement
 The average retail investor interested in stock market investing often faces an overwhelming amount of information, making it challenging to gain quick, actionable insights into a company's stock performance and public sentiment. This information overload can lead to decision paralysis or uninformed investment choices. 
@@ -16,7 +17,7 @@ to gather information about a prospective company they may want to invest in.
 - Polygon.io API
 - Reddit API
 
-# Design
+# Design & Development
 
 ## Solution Architecture
 ![Solution Architecture Diagram](./docs/solution-architecture.png)
@@ -24,9 +25,9 @@ to gather information about a prospective company they may want to invest in.
 ## Tech Stack
 - **Storage:** AWS S3, Delta Lake, Parquet
 - **Processing:** Databricks, Hugging Face, Apache Spark, dbt
+- **Data Visualization:** Databricks Dashboards
 - **Orchestration:** Astronomer/Airflow
 - **DevOps:** GitHub, GitHub Actions
-- **Data Visualization:** Databricks Dashboards
 
 ## Conceptual Data Model
 ![Conceptual Data Model Diagram](./docs/conceptual-data-model.png)
@@ -41,4 +42,3 @@ their Free tier which caused issues with extracting Reddit posts data
 # Future Enhancements
 1. Source data from addtional social media networks (e.g. Twitter, Blue Sky, etc.) for more comprehensive sentiment analysis
 2. Add posts data from additional stock/investing related subreddits
-**
