@@ -3,7 +3,7 @@ resources:
     SP500_Stock_Prices_ETL:
       name: SP500_Stock_Prices_ETL
       schedule:
-        quartz_cron_expression: 49 0 22 * * ?
+        quartz_cron_expression: 49 0 5 * * ?
         timezone_id: UTC
         pause_status: PAUSED
       tasks:

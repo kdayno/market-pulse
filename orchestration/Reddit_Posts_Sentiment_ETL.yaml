@@ -3,7 +3,7 @@ resources:
     Reddit_Posts_Sentiment_ETL:
       name: Reddit_Posts_Sentiment_ETL
       schedule:
-        quartz_cron_expression: 29 0 23 * * ?
+        quartz_cron_expression: 29 0 6 * * ?
         timezone_id: UTC
         pause_status: UNPAUSED
       tasks:
