@@ -33,7 +33,7 @@ to gather information about a prospective company they may want to invest in.
 ![Conceptual Data Model Diagram](./docs/conceptual-data-model.png)
 
 ## Dashboard
-![Market Pulse Dashboard](./docs/market_pulse_dashboard.jpeg)
+https://github.com/user-attachments/assets/b957ced9-558e-459d-b026-f40c5c9d32f8
 
 # Challenges
 - The Reddit API has a rate limit of 100 queries per minute (QPM) per OAuth client ID for
