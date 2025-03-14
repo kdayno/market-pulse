@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: dataexpert
+    database: "{{ env_var('DATABRICKS_CATALOG_NAME') }}"
+    schema: "{{ env_var('DATABRICKS_SCHEMA_NAME') }}"
+    tables:
+      - name: kdayno_silver_SP500_stock_prices
+      - name: kdayno_silver_SP500_stock_financials
+      - name: kdayno_silver_reddit_all_posts  
