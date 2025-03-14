@@ -173,3 +173,38 @@ cython_debug/
 archive/
 
 *.DS_Store
+
+# dbt specific
+target/
+dbt_packages/
+logs/
+
+# Legacy - renamed to dbt_packages in dbt v1
+dbt_modules/
+
+# Compiled Python files
+*.pyc
+__pycache__/
+
+# Environment variables
+*.env
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Editor/IDE specific files
+.vscode/
+.idea/
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+
+# Logs
+*.log
+
+# Local development files
+profiles.yml
+.user.yml
