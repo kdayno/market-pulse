@@ -1,0 +1,11 @@
+market_pulse_dbt:
+  target: dev
+  outputs:
+    dev:
+      catalog: "{{ env_var('DATABRICKS_CATALOG_NAME') }}"
+      host: "{{ env_var('DBT_DATABRICKS_HOST_NAME') }}"
+      http_path: "{{ env_var('DBT_DATABRICKS_HTTP_PATH') }}"
+      schema: "{{ env_var('DATABRICKS_SCHEMA_NAME') }}"
+      threads: 2
+      token: "{{ env_var('DBT_DATABRICKS_TOKEN') }}"
+      type: databricks

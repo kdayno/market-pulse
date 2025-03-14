@@ -1,0 +1,1 @@
+{% macro set_materialization() %}{% if target.name == 'prod' %}table{% elif target.name == 'dev' %}table{% else %}view{% endif %}{% endmacro %}

@@ -1,0 +1,199 @@
+version: 2
+
+models:
+  - name: gold_sp500_stock_prices_avg_agg
+    description: Gold table for aggregated average stock prices by S&P 500 company
+    columns:
+      - name: ticker_symbol
+        data_tests:
+          - not_null
+      - name: average_trading_price
+        data_tests:
+          - not_null
+          - assert_is_positive
+
+  - name: gold_sp500_stock_financial_ratios_agg
+    description: Gold table for aggregated stock financial ratios by S&P 500 company
+    columns:
+      - name: ticker_symbol
+        data_tests:
+          - not_null
+      - name: price_to_earnings_ratio
+        data_tests:
+          - not_null
+      - name: return_on_equity_ratio
+        data_tests:
+          - not_null
+      - name: debt_to_equity_ratio
+        data_tests:
+          - not_null
+      - name: market_capitalization
+        data_tests:
+          - not_null
+          - assert_is_positive
+      - name: sector_average_price_to_earnings_ratio
+        data_tests:
+          - not_null
+      - name: sector_average_return_on_equity_ratio
+        data_tests:
+          - not_null
+      - name: sector_average_debt_to_equity_ratio
+        data_tests:
+          - not_null
+      - name: sector_average_market_capitalization
+        data_tests:
+          - not_null
+          - assert_is_positive
+
+  - name: gold_posts_last_30_days_overall_sentiment_agg
+    description: Gold table for aggregated overall Reddit sentiment from the past 30 days
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ticker_symbol
+            - sentiment_category
+    columns:
+      - name: ticker_symbol
+        data_tests:
+          - not_null
+      - name: sentiment_category
+        data_tests:
+          - accepted_values:
+              values: ['positive', 'negative', 'neutral']
+      - name: sentiment_category_percentage
+        data_tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+              max_value: 1
+              inclusive: true
+      - name: average_sentiment_score
+        data_tests:
+          - assert_is_positive
+
+  - name: gold_posts_last_90_days_overall_sentiment_agg
+    description: Gold table for aggregated overall Reddit sentiment from the past 90 days
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ticker_symbol
+            - sentiment_category
+    columns:
+      - name: ticker_symbol
+        data_tests:
+          - not_null
+      - name: sentiment_category
+        data_tests:
+          - accepted_values:
+              values: ['positive', 'negative', 'neutral']
+      - name: sentiment_category_percentage
+        data_tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+              max_value: 1
+              inclusive: true
+      - name: average_sentiment_score
+        data_tests:
+          - assert_is_positive
+
+  - name: gold_posts_last_365_days_overall_sentiment_agg
+    description: Gold table for aggregated overall Reddit sentiment from the past 365 days
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ticker_symbol
+            - sentiment_category
+    columns:
+      - name: ticker_symbol
+        data_tests:
+          - not_null
+      - name: sentiment_category
+        data_tests:
+          - accepted_values:
+              values: ['positive', 'negative', 'neutral']
+      - name: sentiment_category_percentage
+        data_tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+              max_value: 1
+              inclusive: true
+      - name: average_sentiment_score
+        data_tests:
+          - assert_is_positive
+
+  - name: gold_posts_last_30_days_subreddit_sentiment_agg
+    description: Gold table for aggregated sentiment by each subreddit from the past 30 days
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ticker_symbol
+            - subreddit
+            - sentiment_category
+    columns:
+      - name: ticker_symbol
+        data_tests:
+          - not_null
+      - name: sentiment_category
+        data_tests:
+          - accepted_values:
+              values: ['positive', 'negative', 'neutral']
+      - name: sentiment_category_percentage
+        data_tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+              max_value: 1
+              inclusive: true
+      - name: average_sentiment_score
+        data_tests:
+          - assert_is_positive
+
+  - name: gold_posts_last_90_days_subreddit_sentiment_agg
+    description: Gold table for aggregated sentiment by each subreddit from the past 90 days
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ticker_symbol
+            - subreddit
+            - sentiment_category
+    columns:
+      - name: ticker_symbol
+        data_tests:
+          - not_null
+      - name: sentiment_category
+        data_tests:
+          - accepted_values:
+              values: ['positive', 'negative', 'neutral']
+      - name: sentiment_category_percentage
+        data_tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+              max_value: 1
+              inclusive: true
+      - name: average_sentiment_score
+        data_tests:
+          - assert_is_positive
+
+  - name: gold_posts_last_365_days_subreddit_sentiment_agg
+    description: Gold table for aggregated sentiment by each subreddit from the past 365 days
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ticker_symbol
+            - subreddit
+            - sentiment_category
+    columns:
+      - name: ticker_symbol
+        data_tests:
+          - not_null
+      - name: sentiment_category
+        data_tests:
+          - accepted_values:
+              values: ['positive', 'negative', 'neutral']
+      - name: sentiment_category_percentage
+        data_tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+              max_value: 1
+              inclusive: true
+      - name: average_sentiment_score
+        data_tests:
+          - assert_is_positive
