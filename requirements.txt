@@ -3,6 +3,6 @@ python-dotenv
 requests
 polygon-api-client
 asyncpraw
-dbt-core
-dbt-databricks
-sqlfluff
+dbt-core==1.9.2
+dbt-databricks==1.9.7
+sqlfluff==3.0.6
