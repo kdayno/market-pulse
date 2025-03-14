@@ -7,5 +7,5 @@ market_pulse_dbt:
       http_path: "{{ env_var('DBT_DATABRICKS_HTTP_PATH') }}"
       schema: "{{ env_var('DATABRICKS_SCHEMA_NAME') }}"
       threads: 2
-      token: "{{ env_var('DBT_DATABRICKS_TOKEN') }}"
+      token: "{{ env_var('DBT_ACCESS_TOKEN') }}"
       type: databricks
