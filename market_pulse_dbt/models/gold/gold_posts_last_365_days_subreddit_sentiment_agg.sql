@@ -1,3 +1,5 @@
+{{ config(materialized=set_materialization()) }}
+
 with silver_reddit_all_posts as (
     select 
     * 
@@ -16,7 +18,7 @@ posts_sentiment_agg as (
         , total_posts
         , round(avg(sentiment_score), 2) as average_sentiment_score
         , round(count(*) / total_posts, 2) as sentiment_category_percentage
-    from all_posts
+    from silver_reddit_all_posts
     group by ticker_symbol, company_name, subreddit, sentiment_category, total_posts
     ),        
 

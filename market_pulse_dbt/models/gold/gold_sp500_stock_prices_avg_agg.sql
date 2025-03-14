@@ -1,3 +1,5 @@
+{{ config(materialized=set_materialization()) }}
+
 with silver_SP500_stock_prices as (
     select *
     from {{ source('dataexpert', 'kdayno_silver_SP500_stock_prices')}}

@@ -1,3 +1,5 @@
+{{ config(materialized=set_materialization()) }}
+
 with silver_reddit_all_posts as (
     select 
         * 
