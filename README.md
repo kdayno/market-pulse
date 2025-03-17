@@ -38,7 +38,10 @@ https://github.com/user-attachments/assets/b957ced9-558e-459d-b026-f40c5c9d32f8
 # Challenges
 - The Reddit API has a rate limit of 100 queries per minute (QPM) per OAuth client ID for
 their Free tier which caused issues with extracting Reddit posts data
+- ...
+- ...
 
 # Future Enhancements
 1. Source data from addtional social media networks (e.g. Twitter, Blue Sky, etc.) for more comprehensive sentiment analysis
 2. Add posts data from additional stock/investing related subreddits
+3. 
