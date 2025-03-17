@@ -1,4 +1,4 @@
-![Market Pulse Logo](./docs/market-pulse-logo-large.png)
+![Market Pulse Logo](./docs/market-pulse-logo.png)
 
 # Overview
 
