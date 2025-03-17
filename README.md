@@ -1,4 +1,4 @@
-![Market Pulse Logo](./docs/market-pulse-logo.png)
+![Market Pulse Logo](./docs/market-pulse-logo-large.png)
 
 # Overview
 
@@ -26,7 +26,7 @@ to gather information about a prospective company they may want to invest in.
 - **Storage:** AWS S3, Delta Lake, Parquet
 - **Processing:** Databricks, Hugging Face, Apache Spark, dbt
 - **Data Visualization:** Databricks Dashboards
-- **Orchestration:** Astronomer/Airflow
+- **Orchestration:** Databricks Workflows
 - **DevOps:** GitHub, GitHub Actions
 
 ## Conceptual Data Model
