@@ -24,7 +24,7 @@ to gather information about a prospective company they may want to invest in.
 
 ## Tech Stack
 - **Storage:** AWS S3, Delta Lake, Parquet
-- **Processing:** Databricks, Hugging Face, Apache Spark, dbt
+- **Data Processing:** Databricks, Hugging Face, Apache Spark, dbt
 - **Data Visualization:** Databricks Dashboards
 - **Orchestration:** Databricks Workflows
 - **DevOps:** GitHub, GitHub Actions
