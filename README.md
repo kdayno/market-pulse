@@ -33,7 +33,7 @@ to gather information about a prospective company they may want to invest in.
 ![Conceptual Data Model Diagram](./docs/conceptual-data-model.png)
 
 ## Dashboard
-https://github.com/user-attachments/assets/b957ced9-558e-459d-b026-f40c5c9d32f8
+https://github.com/user-attachments/assets/1f82142e-505e-46d8-9a7a-5b431d633d1a
 
 # Challenges
 - The Reddit API has a rate limit of 100 queries per minute (QPM) per OAuth client ID for
