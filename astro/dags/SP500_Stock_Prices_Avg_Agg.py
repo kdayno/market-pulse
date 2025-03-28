@@ -18,7 +18,7 @@ profile_config = ProfileConfig(
 
 
 @dag(
-    description='',
+    description='Triggers dbt DAG that aggregates S&P500 stock price data and creates gold table',
     default_args = {
         "owner": "Kevin Dayno",
         "retries": 0,
