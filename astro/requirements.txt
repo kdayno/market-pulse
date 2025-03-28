@@ -1,0 +1,10 @@
+boto3
+python-dotenv
+requests
+polygon-api-client
+asyncpraw
+dbt-core
+dbt-databricks
+sqlfluff
+apache-airflow-providers-databricks==6.10.0
+astronomer-cosmos
