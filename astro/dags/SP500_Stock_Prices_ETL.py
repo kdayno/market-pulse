@@ -1,27 +1,17 @@
-"""
-# Run notebooks in databricks as a Databricks Workflow using the Airflow Databricks provider
-
-This DAG runs two Databricks notebooks as a Databricks workflow.
-"""
-
 from airflow.decorators import dag
 from airflow.providers.databricks.operators.databricks import DatabricksNotebookOperator
-from airflow.providers.databricks.operators.databricks_workflow import (
-    DatabricksWorkflowTaskGroup,
-)
+from airflow.providers.databricks.operators.databricks_workflow import DatabricksWorkflowTaskGroup
 from airflow.operators.trigger_dagrun import TriggerDagRunOperator
-
-from airflow.models.baseoperator import chain
 from pendulum import datetime
+from datetime import timedelta
 
 DATABRICKS_LOGIN_EMAIL = "kdayno@gmail.com"
 
 DATABRICKS_ETL_NOTEBOOKS_PATH = f"/Users/{DATABRICKS_LOGIN_EMAIL}/market-pulse/etl"
 DATABRICKS_TEST_NOTEBOOKS_PATH = f"/Users/{DATABRICKS_LOGIN_EMAIL}/market-pulse/tests/data-quality-tests"
 
-DATABRICKS_JOB_CLUSTER_KEY = "test-cluster"
+DATABRICKS_JOB_CLUSTER_KEY = "market-pulse-job-cluster"
 DATABRICKS_CONN_ID = "databricks_conn"
-
 
 job_cluster_spec = [
     {
@@ -48,7 +38,19 @@ job_cluster_spec = [
 ]
 
 
-@dag(start_date=datetime(2024, 7, 1), schedule=None, catchup=False)
+@dag(
+    description="Triggers the multi-step ETL process for S&P500 Stock price data then triggers dbt DAG that aggregates the data",
+    default_args = {
+        "owner": "Kevin Dayno",
+        "retries": 0,
+        "execution_timeout": timedelta(hours=1),
+    },
+    start_date=datetime(2025, 1, 1),
+    max_active_runs=1,
+    schedule_interval="@daily",
+    catchup=False,
+    tags=['Market Pulse']
+    )
 def SP500_Stock_Prices_ETL():
 
     task_group = DatabricksWorkflowTaskGroup(
@@ -100,14 +102,13 @@ def SP500_Stock_Prices_ETL():
             job_cluster_key=DATABRICKS_JOB_CLUSTER_KEY,
         )
 
-    # trigger_dependent_dag = TriggerDagRunOperator(
-    #     task_id="trigger_dependent_dag",
-    #     trigger_dag_id="dependent_dag",
-    #     wait_for_completion=True,
-    #     deferrable=True,  # Note that this parameter only exists in Airflow 2.6+
-    # )
+    trigger_dependent_dag = TriggerDagRunOperator(
+        task_id="Trigger_SP500_Stock_Prices_Avg_Agg",
+        trigger_dag_id="SP500_Stock_Prices_Avg_Agg",
+        wait_for_completion=True,
+        deferrable=True,  # Note that this parameter only exists in Airflow 2.6+
+    )
 
-    extract_polygon_stock_prices >> dq_tests_bronze_SP500_stock_prices >> transform_SP500_stock_prices >> SP500_stock_prices_avg_agg 
-    # >> trigger_dependent_dag
+    extract_polygon_stock_prices >> dq_tests_bronze_SP500_stock_prices >> transform_SP500_stock_prices >> SP500_stock_prices_avg_agg >> trigger_dependent_dag
 
 SP500_Stock_Prices_ETL()
