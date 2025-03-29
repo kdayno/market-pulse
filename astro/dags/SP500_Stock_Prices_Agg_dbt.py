@@ -30,7 +30,7 @@ profile_config = ProfileConfig(
 
     tags=['Market Pulse']
     )
-def SP500_Stock_Prices_Avg_Agg():
+def SP500_Stock_Prices_Avg_Agg_dbt():
 
     # Pre DBT workflow task
     pre_dbt_workflow = EmptyOperator(task_id="pre_dbt_workflow")
@@ -53,4 +53,4 @@ def SP500_Stock_Prices_Avg_Agg():
     # Task dependencies
     pre_dbt_workflow >> dbt_run_staging >> post_dbt_workflow
 
-SP500_Stock_Prices_Avg_Agg()
+SP500_Stock_Prices_Avg_Agg_dbt()

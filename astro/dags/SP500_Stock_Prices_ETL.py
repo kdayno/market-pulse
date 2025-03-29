@@ -54,7 +54,7 @@ job_cluster_spec = [
 def SP500_Stock_Prices_ETL():
 
     task_group = DatabricksWorkflowTaskGroup(
-        group_id="databricks_workflow",
+        group_id="SP500_Stock_Prices_ETL",
         databricks_conn_id=DATABRICKS_CONN_ID,
         job_clusters=job_cluster_spec,
         notebook_params={"input_load_date": "{{ ds }}"},
@@ -102,13 +102,17 @@ def SP500_Stock_Prices_ETL():
             job_cluster_key=DATABRICKS_JOB_CLUSTER_KEY,
         )
 
-    trigger_dependent_dag = TriggerDagRunOperator(
+    trigger_SP500_stock_prices_agg_dbt = TriggerDagRunOperator(
         task_id="Trigger_SP500_Stock_Prices_Avg_Agg",
-        trigger_dag_id="SP500_Stock_Prices_Avg_Agg",
+        trigger_dag_id="SP500_Stock_Prices_Agg_dbt",
         wait_for_completion=True,
         deferrable=True,  # Note that this parameter only exists in Airflow 2.6+
     )
 
-    extract_polygon_stock_prices >> dq_tests_bronze_SP500_stock_prices >> transform_SP500_stock_prices >> SP500_stock_prices_avg_agg >> trigger_dependent_dag
+    (extract_polygon_stock_prices 
+    >> dq_tests_bronze_SP500_stock_prices 
+    >> transform_SP500_stock_prices 
+    >> SP500_stock_prices_avg_agg 
+    >> trigger_SP500_stock_prices_agg_dbt)
 
 SP500_Stock_Prices_ETL()
