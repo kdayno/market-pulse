@@ -8,8 +8,7 @@ from include.databricks_job_cluser_config import job_cluster_ml_spec
 
 DATABRICKS_LOGIN_EMAIL = "kdayno@gmail.com"
 
-DATABRICKS_ETL_NOTEBOOKS_PATH = f"/Users/{DATABRICKS_LOGIN_EMAIL}/market-pulse/etl"
-DATABRICKS_TEST_NOTEBOOKS_PATH = f"/Users/{DATABRICKS_LOGIN_EMAIL}/market-pulse/tests/data-quality-tests"
+DATABRICKS_NOTEBOOKS_PATH = f"/Users/{DATABRICKS_LOGIN_EMAIL}/market-pulse/etl"
 
 DATABRICKS_JOB_CLUSTER_KEY = job_cluster_ml_spec[0]['job_cluster_key']
 DATABRICKS_CONN_ID = "databricks_conn"
@@ -51,7 +50,7 @@ def Reddit_Posts_Sentiment_ETL():
         extract_reddit_top_posts = DatabricksNotebookOperator(
             task_id="extract_reddit_top_posts",
             databricks_conn_id=DATABRICKS_CONN_ID,
-            notebook_path=f"{DATABRICKS_ETL_NOTEBOOKS_PATH}/extract/extract_reddit_posts",
+            notebook_path=f"{DATABRICKS_NOTEBOOKS_PATH}/extract/extract_reddit_posts",
             source="WORKSPACE",
             job_cluster_key=DATABRICKS_JOB_CLUSTER_KEY
         )
@@ -59,7 +58,7 @@ def Reddit_Posts_Sentiment_ETL():
         extract_reddit_hot_posts = DatabricksNotebookOperator(
             task_id="extract_reddit_hot_posts",
             databricks_conn_id=DATABRICKS_CONN_ID,
-            notebook_path=f"{DATABRICKS_ETL_NOTEBOOKS_PATH}/extract/extract_reddit_posts",
+            notebook_path=f"{DATABRICKS_NOTEBOOKS_PATH}/extract/extract_reddit_posts",
             source="WORKSPACE",
             job_cluster_key=DATABRICKS_JOB_CLUSTER_KEY
         )
@@ -67,7 +66,7 @@ def Reddit_Posts_Sentiment_ETL():
         transform_reddit_top_posts_sentiment_analysis = DatabricksNotebookOperator(
             task_id="transform_reddit_top_posts_sentiment_analysis",
             databricks_conn_id=DATABRICKS_CONN_ID,
-            notebook_path=f"{DATABRICKS_ETL_NOTEBOOKS_PATH}/transform/transform_reddit_posts_sentiment_analysis",
+            notebook_path=f"{DATABRICKS_NOTEBOOKS_PATH}/transform/transform_reddit_posts_sentiment_analysis",
             source="WORKSPACE",
             job_cluster_key=DATABRICKS_JOB_CLUSTER_KEY
         )
@@ -75,7 +74,7 @@ def Reddit_Posts_Sentiment_ETL():
         transform_reddit_hot_posts_sentiment_analysis = DatabricksNotebookOperator(
             task_id="transform_reddit_hot_posts_sentiment_analysis",
             databricks_conn_id=DATABRICKS_CONN_ID,
-            notebook_path=f"{DATABRICKS_ETL_NOTEBOOKS_PATH}/transform/transform_reddit_posts_sentiment_analysis",
+            notebook_path=f"{DATABRICKS_NOTEBOOKS_PATH}/transform/transform_reddit_posts_sentiment_analysis",
             source="WORKSPACE",
             job_cluster_key=DATABRICKS_JOB_CLUSTER_KEY
         )
@@ -83,7 +82,7 @@ def Reddit_Posts_Sentiment_ETL():
         dq_tests_silver_reddit_hot_posts_sentiment = DatabricksNotebookOperator(
             task_id="dq_tests_silver_reddit_hot_posts_sentiment",
             databricks_conn_id=DATABRICKS_CONN_ID,
-            notebook_path=f"{DATABRICKS_TEST_NOTEBOOKS_PATH}/dq_tests_silver_reddit_posts_sentiment",
+            notebook_path=f"{DATABRICKS_NOTEBOOKS_PATH}/tests/data-quality-tests/dq_tests_silver_reddit_posts_sentiment",
             source="WORKSPACE",
             job_cluster_key=DATABRICKS_JOB_CLUSTER_KEY
         )
@@ -91,7 +90,7 @@ def Reddit_Posts_Sentiment_ETL():
         dq_tests_silver_reddit_top_posts_sentiment = DatabricksNotebookOperator(
             task_id="dq_tests_silver_reddit_top_posts_sentiment",
             databricks_conn_id=DATABRICKS_CONN_ID,
-            notebook_path=f"{DATABRICKS_TEST_NOTEBOOKS_PATH}/dq_tests_silver_reddit_posts_sentiment",
+            notebook_path=f"{DATABRICKS_NOTEBOOKS_PATH}/tests/data-quality-tests/dq_tests_silver_reddit_posts_sentiment",
             source="WORKSPACE",
             job_cluster_key=DATABRICKS_JOB_CLUSTER_KEY
         )
@@ -99,7 +98,7 @@ def Reddit_Posts_Sentiment_ETL():
         transform_reddit_all_posts = DatabricksNotebookOperator(
             task_id="transform_reddit_all_posts",
             databricks_conn_id=DATABRICKS_CONN_ID,
-            notebook_path=f"{DATABRICKS_ETL_NOTEBOOKS_PATH}/transform/transform_reddit_all_posts",
+            notebook_path=f"{DATABRICKS_NOTEBOOKS_PATH}/transform/transform_reddit_all_posts",
             source="WORKSPACE",
             job_cluster_key=DATABRICKS_JOB_CLUSTER_KEY,
         )

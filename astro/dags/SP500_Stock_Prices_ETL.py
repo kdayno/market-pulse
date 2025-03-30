@@ -8,8 +8,7 @@ from include.databricks_job_cluser_config import job_cluster_spec
 
 DATABRICKS_LOGIN_EMAIL = "kdayno@gmail.com"
 
-DATABRICKS_ETL_NOTEBOOKS_PATH = f"/Users/{DATABRICKS_LOGIN_EMAIL}/market-pulse/etl"
-DATABRICKS_TEST_NOTEBOOKS_PATH = f"/Users/{DATABRICKS_LOGIN_EMAIL}/market-pulse/tests/data-quality-tests"
+DATABRICKS_NOTEBOOKS_PATH = f"/Users/{DATABRICKS_LOGIN_EMAIL}/market-pulse/etl"
 
 DATABRICKS_JOB_CLUSTER_KEY = job_cluster_spec[0]['job_cluster_key']
 DATABRICKS_CONN_ID = "databricks_conn"
@@ -49,7 +48,7 @@ def SP500_Stock_Prices_ETL():
         extract_polygon_stock_prices = DatabricksNotebookOperator(
             task_id="extract_polygon_stock_prices",
             databricks_conn_id=DATABRICKS_CONN_ID,
-            notebook_path=f"{DATABRICKS_ETL_NOTEBOOKS_PATH}/extract/extract_polygon_stock_prices",
+            notebook_path=f"{DATABRICKS_NOTEBOOKS_PATH}/extract/extract_polygon_stock_prices",
             source="WORKSPACE",
             job_cluster_key=DATABRICKS_JOB_CLUSTER_KEY
         )
@@ -57,7 +56,7 @@ def SP500_Stock_Prices_ETL():
         dq_tests_bronze_SP500_stock_prices = DatabricksNotebookOperator(
             task_id="dq_tests_bronze_SP500_stock_prices",
             databricks_conn_id=DATABRICKS_CONN_ID,
-            notebook_path=f"{DATABRICKS_TEST_NOTEBOOKS_PATH}/dq_tests_bronze_SP500_stock_prices",
+            notebook_path=f"{DATABRICKS_NOTEBOOKS_PATH}/tests/data-quality-tests/dq_tests_bronze_SP500_stock_prices",
             source="WORKSPACE",
             job_cluster_key=DATABRICKS_JOB_CLUSTER_KEY
         )
@@ -65,7 +64,7 @@ def SP500_Stock_Prices_ETL():
         transform_SP500_stock_prices = DatabricksNotebookOperator(
             task_id="transform_SP500_stock_prices",
             databricks_conn_id=DATABRICKS_CONN_ID,
-            notebook_path=f"{DATABRICKS_ETL_NOTEBOOKS_PATH}/transform/transform_SP500_stock_prices",
+            notebook_path=f"{DATABRICKS_NOTEBOOKS_PATH}/transform/transform_SP500_stock_prices",
             source="WORKSPACE",
             job_cluster_key=DATABRICKS_JOB_CLUSTER_KEY,
         )
@@ -73,7 +72,7 @@ def SP500_Stock_Prices_ETL():
         SP500_stock_prices_avg_agg = DatabricksNotebookOperator(
             task_id="SP500_stock_prices_avg_agg",
             databricks_conn_id=DATABRICKS_CONN_ID,
-            notebook_path=f"{DATABRICKS_ETL_NOTEBOOKS_PATH}/load/SP500_stock_prices_avg_agg",
+            notebook_path=f"{DATABRICKS_NOTEBOOKS_PATH}/load/SP500_stock_prices_avg_agg",
             source="WORKSPACE",
             job_cluster_key=DATABRICKS_JOB_CLUSTER_KEY,
         )
