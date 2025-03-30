@@ -4,39 +4,15 @@ from airflow.providers.databricks.operators.databricks_workflow import Databrick
 from airflow.operators.trigger_dagrun import TriggerDagRunOperator
 from pendulum import datetime
 from datetime import timedelta
+from include.databricks_job_cluser_config import job_cluster_spec
 
 DATABRICKS_LOGIN_EMAIL = "kdayno@gmail.com"
 
 DATABRICKS_ETL_NOTEBOOKS_PATH = f"/Users/{DATABRICKS_LOGIN_EMAIL}/market-pulse/etl"
 DATABRICKS_TEST_NOTEBOOKS_PATH = f"/Users/{DATABRICKS_LOGIN_EMAIL}/market-pulse/tests/data-quality-tests"
 
-DATABRICKS_JOB_CLUSTER_KEY = "market-pulse-job-cluster"
+DATABRICKS_JOB_CLUSTER_KEY = job_cluster_spec[0]['job_cluster_key']
 DATABRICKS_CONN_ID = "databricks_conn"
-
-job_cluster_spec = [
-    {
-        "job_cluster_key": DATABRICKS_JOB_CLUSTER_KEY,
-        "new_cluster": {
-            "cluster_name": "",
-            "spark_version": "16.2.x-scala2.12",
-            "aws_attributes": {
-                "first_on_demand": 1,
-                "availability": "SPOT_WITH_FALLBACK",
-                "zone_id": "auto",
-                "spot_bid_price_percent": 100,
-                "ebs_volume_count": 0,
-            },
-            "node_type_id": "m5d.large",
-            "spark_env_vars": {"PYSPARK_PYTHON": "/databricks/python3/bin/python3"},
-            "enable_elastic_disk": False,
-            "data_security_mode": "DATA_SECURITY_MODE_AUTO",
-            "kind": "CLASSIC_PREVIEW",
-            "runtime_engine": "PHOTON",
-            "num_workers": 1,
-        },
-    }
-]
-
 
 @dag(
     description="Triggers the multi-step ETL process for S&P500 Stock price data then triggers dbt DAG that aggregates the data",
@@ -53,8 +29,8 @@ job_cluster_spec = [
     )
 def SP500_Stock_Prices_ETL():
 
-    task_group = DatabricksWorkflowTaskGroup(
-        group_id="SP500_Stock_Prices_ETL",
+    databricks_workflow = DatabricksWorkflowTaskGroup(
+        group_id="databricks_workflow",
         databricks_conn_id=DATABRICKS_CONN_ID,
         job_clusters=job_cluster_spec,
         notebook_params={"input_load_date": "{{ ds }}"},
@@ -69,7 +45,7 @@ def SP500_Stock_Prices_ETL():
                             ]
     )
 
-    with task_group:
+    with databricks_workflow:
         extract_polygon_stock_prices = DatabricksNotebookOperator(
             task_id="extract_polygon_stock_prices",
             databricks_conn_id=DATABRICKS_CONN_ID,
@@ -103,7 +79,7 @@ def SP500_Stock_Prices_ETL():
         )
 
     trigger_SP500_stock_prices_agg_dbt = TriggerDagRunOperator(
-        task_id="Trigger_SP500_Stock_Prices_Avg_Agg",
+        task_id="trigger_SP500_stock_prices_agg_dbt",
         trigger_dag_id="SP500_Stock_Prices_Agg_dbt",
         wait_for_completion=True,
         deferrable=True,  # Note that this parameter only exists in Airflow 2.6+

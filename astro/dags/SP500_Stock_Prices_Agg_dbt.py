@@ -27,8 +27,7 @@ profile_config = ProfileConfig(
     start_date=datetime(2025, 1, 1),
     schedule=None,
     catchup=False,
-
-    tags=['Market Pulse']
+    tags=['Market Pulse', 'dbt']
     )
 def SP500_Stock_Prices_Avg_Agg_dbt():
 
