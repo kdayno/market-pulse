@@ -6,3 +6,5 @@ asyncpraw
 dbt-core==1.9.2
 dbt-databricks==1.9.7
 sqlfluff==3.0.6
+apache-airflow-providers-databricks==6.10.0
+astronomer-cosmos
