@@ -13,3 +13,5 @@ RUN source .venv/bin/activate
 RUN mv ./market_pulse_dbt/profiles.yml.template ./market_pulse_dbt/profiles.yml
 
 WORKDIR /usr/local/airflow
+
+ENV AIRFLOW__SCHEDULER__JOB_HEARTBEAT_SEC=15
