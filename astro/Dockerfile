@@ -4,10 +4,12 @@ USER root
 RUN apt-get update && apt-get install -y git
 RUN git clone https://github.com/kdayno/market-pulse.git
 
-WORKDIR ./market-pulse
+WORKDIR /usr/local/airflow/market-pulse
 
 RUN python3 -m venv .venv
 SHELL ["/bin/bash", "-c"]
 RUN source .venv/bin/activate
 
 RUN mv ./market_pulse_dbt/profiles.yml.template ./market_pulse_dbt/profiles.yml
+
+WORKDIR /usr/local/airflow
