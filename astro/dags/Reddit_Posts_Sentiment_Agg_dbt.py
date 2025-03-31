@@ -40,7 +40,7 @@ def Reddit_Posts_Sentiment_Agg_dbt():
             dbt_executable_path=f"./.venv/bin/dbt",
         ),
         render_config=RenderConfig(
-            select=["+source:kdayno_silver_reddit_all_posts"],
+            select=["source:kdayno_silver_reddit_all_posts+"],
         ),
     )
 
