@@ -7,8 +7,8 @@ from cosmos.constants import TestBehavior
 
 MARKET_PULSE_DIR_PATH = os.getcwd()
 
-PATH_TO_DBT_PROJECT = f"{MARKET_PULSE_DIR_PATH}/market_pulse_dbt"
-PATH_TO_DBT_PROFILES = f"{MARKET_PULSE_DIR_PATH}/market_pulse_dbt/profiles.yml"
+PATH_TO_DBT_PROJECT = f"{MARKET_PULSE_DIR_PATH}/market-pulse/market_pulse_dbt"
+PATH_TO_DBT_PROFILES = f"{MARKET_PULSE_DIR_PATH}/market-pulse/market_pulse_dbt/profiles.yml"
 
 profile_config = ProfileConfig(
     profile_name="market_pulse_dbt",
