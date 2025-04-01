@@ -69,14 +69,6 @@ def SP500_Stock_Prices_ETL():
             job_cluster_key=DATABRICKS_JOB_CLUSTER_KEY,
         )
 
-        SP500_stock_prices_avg_agg = DatabricksNotebookOperator(
-            task_id="SP500_stock_prices_avg_agg",
-            databricks_conn_id=DATABRICKS_CONN_ID,
-            notebook_path=f"{DATABRICKS_NOTEBOOKS_PATH}/load/SP500_stock_prices_avg_agg",
-            source="WORKSPACE",
-            job_cluster_key=DATABRICKS_JOB_CLUSTER_KEY,
-        )
-
     trigger_SP500_stock_prices_agg_dbt = TriggerDagRunOperator(
         task_id="trigger_SP500_stock_prices_agg_dbt",
         trigger_dag_id="SP500_Stock_Prices_Agg_dbt",
@@ -87,7 +79,6 @@ def SP500_Stock_Prices_ETL():
     (extract_polygon_stock_prices 
     >> dq_tests_bronze_SP500_stock_prices 
     >> transform_SP500_stock_prices 
-    >> SP500_stock_prices_avg_agg 
     >> trigger_SP500_stock_prices_agg_dbt)
 
 SP500_Stock_Prices_ETL()
