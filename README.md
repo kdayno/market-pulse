@@ -26,7 +26,7 @@ to gather information about a prospective company they may want to invest in.
 - **Storage:** AWS S3, Delta Lake, Parquet
 - **Data Processing:** Databricks, Hugging Face, Apache Spark, dbt
 - **Data Visualization:** Databricks Dashboards
-- **Orchestration:** Databricks Workflows
+- **Orchestration:** Astronomer/Airflow
 - **DevOps:** GitHub, GitHub Actions
 
 ## Conceptual Data Model
