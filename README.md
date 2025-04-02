@@ -20,7 +20,7 @@ to gather information about a prospective company they may want to invest in.
 # Design & Development
 
 ## Solution Architecture
-![Solution Architecture Diagram](./docs/solution-architecture.png)
+![Solution Architecture Diagram](./docs/solution-architecture-v2qq.png)
 
 ## Tech Stack
 - **Storage:** AWS S3, Delta Lake, Parquet
