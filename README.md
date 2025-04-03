@@ -1,8 +1,23 @@
 ![Market Pulse Logo](./docs/market-pulse-header.png)
 
-# Overview
+# Table of Contents
+- [Overview](#overview)
+  - [Problem Statement](#problem-statement)
+  - [Purpose](#purpose)
+  - [End User](#end-user)
+  - [Data Sources](#data-sources)
+- [Design \& Development](#design--development)
+  - [Solution Architecture](#solution-architecture)
+  - [Tech Stack](#tech-stack)
+  - [Conceptual Data Model](#conceptual-data-model)
+  - [Dashboard](#dashboard)
+- [Challenges](#challenges)
+- [Future Enhancements](#future-enhancements)
 
-## Problem Statement
+<br>
+
+# Overview
+## Problem Statement 
 The average retail investor interested in stock market investing often faces an overwhelming amount of information, making it challenging to gain quick, actionable insights into a company's stock performance and public sentiment. This information overload can lead to decision paralysis or uninformed investment choices. 
 
 ## Purpose
