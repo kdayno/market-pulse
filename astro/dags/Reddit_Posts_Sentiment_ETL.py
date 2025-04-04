@@ -22,7 +22,7 @@ DATABRICKS_CONN_ID = "databricks_conn"
     },
     start_date=datetime(2025, 1, 1),
     max_active_runs=1,
-    schedule_interval="0 21 * * *", # Daily at 9PM UTC
+    schedule_interval="0 22 * * *", # Daily at 9PM UTC
     catchup=False,
     tags=['Market Pulse']
     )
