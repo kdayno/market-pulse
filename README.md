@@ -1,5 +1,4 @@
 ![Market Pulse Logo](./docs/market-pulse-header.png)
-
 - [Overview](#overview)
   - [Problem Statement](#problem-statement)
   - [Purpose](#purpose)
