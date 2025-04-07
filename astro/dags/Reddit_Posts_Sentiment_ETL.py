@@ -18,7 +18,7 @@ DATABRICKS_CONN_ID = "databricks_conn"
     default_args = {
         "owner": "Kevin Dayno",
         "retries": 0,
-        "execution_timeout": timedelta(hours=1),
+        "execution_timeout": timedelta(hours=3),
     },
     start_date=datetime(2025, 1, 1),
     max_active_runs=1,
