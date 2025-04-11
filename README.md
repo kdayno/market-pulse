@@ -89,7 +89,7 @@ market-pulse
 │   ├── models
 │   │   └── gold      -> dbt models for gold layer
 │   └── tests        
-        └── generic   -> Custom generic tests
+│       └── generic   -> Custom generic tests
 ├── LICENSE.md
 ├── README.md
 └── requirements.txt
