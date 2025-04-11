@@ -1,6 +1,22 @@
 ![Market Pulse Logo](./docs/images/market-pulse-header.png)
 
 **Table of Contents**
+- [1. Overview](#1-overview)
+  - [1.1. Problem Statement](#11-problem-statement)
+  - [1.2. Purpose](#12-purpose)
+  - [1.3. End User](#13-end-user)
+  - [1.4. Data Sources](#14-data-sources)
+- [2. Design \& Development](#2-design--development)
+  - [2.1. Solution Architecture](#21-solution-architecture)
+  - [2.2. Tech Stack](#22-tech-stack)
+  - [2.3. Conceptual Data Model](#23-conceptual-data-model)
+  - [2.4. dbt Gold Layer Lineage](#24-dbt-gold-layer-lineage)
+  - [2.5. Astronomer Orchestration](#25-astronomer-orchestration)
+  - [2.6. Dashboard](#26-dashboard)
+- [3. Challenges](#3-challenges)
+- [4. Future Enhancements](#4-future-enhancements)
+- [5. Project Structure](#5-project-structure)
+- [6. References](#6-references)
 
 
 <br>
@@ -38,14 +54,14 @@ to gather information about a prospective company they may want to invest in.
 ## 2.3. Conceptual Data Model
 ![Conceptual Data Model Diagram](./docs/images/conceptual-data-model.png)
 
-## 2.4. Dashboard
-https://github.com/user-attachments/assets/1f82142e-505e-46d8-9a7a-5b431d633d1a
-
-## 2.5. dbt Gold Layer Lineage
+## 2.4. dbt Gold Layer Lineage
 ![dbt Gold Layer Lineage](./docs/images/dbt-gold-layer-data-lineage.jpeg)
 
-## 2.6. Astronomer Orchestration
+## 2.5. Astronomer Orchestration
 ![Astronomer Orchestration Dashboard](./docs/images/astronomer-orchestration-dashboard.jpeg)
+
+## 2.6. Dashboard
+https://github.com/user-attachments/assets/1f82142e-505e-46d8-9a7a-5b431d633d1a
 
 <br>
 
