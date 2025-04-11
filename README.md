@@ -41,12 +41,11 @@ to gather information about a prospective company they may want to invest in.
 ## 2.4. Dashboard
 https://github.com/user-attachments/assets/1f82142e-505e-46d8-9a7a-5b431d633d1a
 
-
-## 2.5. Astronomer Orchestration
-![Astronomer Orchestration Dashboard](./docs/images/astronomer-orchestration-dashboard.jpeg)
-
-## 2.6. dbt Gold Layer Lineage
+## 2.5. dbt Gold Layer Lineage
 ![dbt Gold Layer Lineage](./docs/images/dbt-gold-layer-data-lineage.jpeg)
+
+## 2.6. Astronomer Orchestration
+![Astronomer Orchestration Dashboard](./docs/images/astronomer-orchestration-dashboard.jpeg)
 
 <br>
 
